@@ -23,5 +23,11 @@
   "devDependencies": {
     "electron": "^16.0.8",
     "electron-packager": "^15.4.0"
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "ffmpeg": "^0.0.4",
+    "ffmpeg-extract-frames": "^2.0.2",
+    "fluent-ffmpeg": "^2.1.2"
   }
 }
