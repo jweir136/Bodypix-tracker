@@ -2,13 +2,25 @@ const extractFrames = require('ffmpeg-extract-frames')
 var fs = require('fs');
 var path = require('path');
 const bodyPix = require('@tensorflow-models/body-pix');
-const Canvas = require("canvas");
-const tf = require("@tensorflow/tfjs");
+const { createCanvas, loadImage, createImageData, Image, Canvas } = require('canvas');
+const tfjs = require("@tensorflow/tfjs");
+const { create } = require('domain');
+const inkjet = require("inkjet");
 
-let img = new Canvas.Image();
+let Img = new Image();
 
 async function main()
 {
+    function convImg(data){
+        let imgD = createImageData(new Uint8ClampedArray(data.data), data.width, data.height);
+        const img = new Image();
+        img.src = srcimagefile;
+        const canvas = createCanvas(data.width,data.height);
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img,0,0,data.width,data.height);
+        return tfjs.browser.fromPixels(canvas);
+    }
+
     let imgPath;
     let net = await bodyPix.load({
         architecture: 'MobileNetV1',
@@ -30,8 +42,16 @@ async function main()
     for await (const dirent of dir) {
         imgPath = "media/" + dirent.name; 
 
-        img.src = imgPath;
-        console.log(img);
+        var srcimagefile = imgPath;
+        var srcimg = fs.readFileSync(srcimagefile);
+        let img;
+        inkjet.decode(srcimg, function(err, data){
+            if(err) throw err;
+            console.log("Image loaded.");
+            img = convImg(data); //this function is provided below
+        });
+        let seg = await net.segmentPerson(img);
+        
     }  
 }
 
