@@ -22,7 +22,7 @@ async function main()
     });
 
     await extractFrames({
-        input: './IMG_1319.mov',
+        input: './jumping-jacks.mp4',
         output: 'media/screenshot-%d.jpg',
         fps: 160
     });
@@ -80,8 +80,16 @@ async function main()
                 annotated_data[idx] = poseData;
             }
 
-            console.log(annotated_data);
         }
+        const storeData = (data, path) => {
+            try {
+              fs.writeFileSync(path, JSON.stringify(data))
+            } catch (err) {
+              console.error(err)
+            }
+          }
+
+        storeData(annotated_data, "output.json");
     });
 }
 
