@@ -8,7 +8,7 @@ const inkjet = require("inkjet");
 
 let Img = new Image();
 
-let annotated_data = {};
+let annotated_data = {"data":[]};
 
 async function main()
 {
@@ -77,7 +77,7 @@ async function main()
                         poseData[part] = {'x':x, 'y':y, 'score':score};
                     }
                 }
-                annotated_data[idx] = poseData;
+                annotated_data["data"].push(poseData);
             }
 
         }
