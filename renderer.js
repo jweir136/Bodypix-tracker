@@ -3,7 +3,7 @@ var fs = require('fs');
 var path = require('path');
 const bodyPix = require('@tensorflow-models/body-pix');
 const { createCanvas, loadImage, createImageData, Image, Canvas } = require('canvas');
-const tfjs = require("@tensorflow/tfjs");   // TODO : Change this to the native nodejs tensorflowjs library in order to speed things up.
+const tfjs = require('@tensorflow/tfjs-node');   // TODO : Change this to the native nodejs tensorflowjs library in order to speed things up.
 const inkjet = require("inkjet");
 
 let Img = new Image();
