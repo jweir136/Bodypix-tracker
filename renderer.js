@@ -4,10 +4,11 @@ var path = require('path');
 const bodyPix = require('@tensorflow-models/body-pix');
 const { createCanvas, loadImage, createImageData, Image, Canvas } = require('canvas');
 const tfjs = require("@tensorflow/tfjs");
-const { create } = require('domain');
 const inkjet = require("inkjet");
 
 let Img = new Image();
+
+let annotated_data = {};
 
 async function main()
 {
@@ -51,7 +52,27 @@ async function main()
             img = convImg(data); //this function is provided below
         });
         let seg = await net.segmentPerson(img);
-        
+
+        let idx = imgPath.split("-")[1].split(".")[0];
+        for (let i = 0; i < seg.allPoses.length; i+=1)
+        {
+            let poseData = {};
+            for (let j = 0; j < seg.allPoses[i].keypoints.length; j+=1)
+            {
+                let part = seg.allPoses[i].keypoints[j].part;
+                let x = seg.allPoses[i].keypoints[j].position.x;
+                let y = seg.allPoses[i].keypoints[j].position.y;
+                let score = seg.allPoses[i].keypoints[j].score;
+                
+                if (score >= 0.80)
+                {
+                    poseData[part] = {'x':x, 'y':y, 'score':score};
+                }
+            }
+            annotated_data[idx] = poseData;
+        }
+
+        console.log(annotated_data);
     }  
 }
 
