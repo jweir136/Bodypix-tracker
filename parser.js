@@ -1,9 +1,18 @@
 const fs = require('fs');
+const { exit } = require('process');
 
 
 // TODO : Add backup reference points because it is rather common for a point to not register on a single frame.
 function parse(filename, referencePoint1, referencePoint2)
 {
+    const storeData = (data, path) => {
+        try {
+          fs.writeFileSync(path, JSON.stringify(data))
+        } catch (err) {
+          console.error(err)
+        }
+    }
+
     function loadJSON(filename)
     {
         let rawdata = fs.readFileSync(filename);
@@ -31,6 +40,7 @@ function parse(filename, referencePoint1, referencePoint2)
 
     for (let i = 0; i < data.length; i+=1)
     {
+        console.log(i);
         if (containsBothReferencePoints(data[i], referencePoint1, referencePoint2))
         {
             frame = {};
@@ -50,10 +60,15 @@ function parse(filename, referencePoint1, referencePoint2)
         else
         {
             outputData.push(null);
+
+            // UNCOMMENT THIS ONCE BACKUP REFERENCE POINTS ARE ADDED!
+            
+            //console.error("cannot find reference point(s)");
+            //exit(-1);
         }
     }
     
-    // TODO : save outputData as JSON
+    storeData({"data":outputData}, "parsed_output.json");
 
 }
 
