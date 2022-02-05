@@ -30,7 +30,18 @@ if __name__ == "__main__":
 
             parsed_data.append(parsed_frame)
 
+    parsed_data_2 = np.random.random(np.array(parsed_data).shape)
 
-    print(fastdtw(np.array(parsed_data), np.array(parsed_data), dist=euclidean)[0])
+    print(np.array(parsed_data_2).shape)
+    print(np.array(parsed_data).shape)
+
+
+    #print(fastdtw(np.array(parsed_data), np.array(parsed_data), dist=euclidean)[0] / len(parsed_data))
+    #print(fastdtw(np.array(parsed_data), parsed_data_2, dist=euclidean)[0] / len(parsed_data))
+    print(((4294967295.0*len(parsed_data))- fastdtw(np.array(parsed_data), np.array(parsed_data), dist=euclidean)[0]) / (4294967295.0*len(parsed_data)))
+    print(((4294967295.0*len(parsed_data))- fastdtw(np.array(parsed_data), parsed_data_2, dist=euclidean)[0]) / (4294967295.0*len(parsed_data)))
+
+
+    print(np.max(np.array(parsed_data)))
 
 # CHANGING THE ACCEPT BOUNDARY WILL CHANGE THE DIFFICULTY OF THE LEVEL
