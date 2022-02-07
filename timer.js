@@ -24,3 +24,14 @@ async function countdownTimer()
     timerHeader.innerHtML = "Recording...";
     timerState["isRecording"] = true;
 }
+
+async function stopRecording()
+{
+    if (!timerState["isRecording"])
+        return;
+
+    let timerHeader = document.getElementById("timer");
+    timerHeader.innerHTML = "";
+
+    timerState["isRecording"] = false;
+}
