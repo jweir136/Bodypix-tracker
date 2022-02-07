@@ -1,5 +1,5 @@
 let timerState = {
-    timerHeader: document.getElementById("timer"),
+    isRecording: false
 };
 
 async function countdownTimer()
@@ -7,6 +7,9 @@ async function countdownTimer()
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+
+    if (timerState["isRecording"])
+        return; // don't start recording if recording is already on.
 
     let timerHeader = document.getElementById("timer");
     let timerCount = 10;
@@ -19,4 +22,5 @@ async function countdownTimer()
     }
 
     timerHeader.innerHtML = "Recording...";
+    timerState["isRecording"] = true;
 }
