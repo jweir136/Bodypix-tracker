@@ -36,3 +36,8 @@ async function stopRecording()
 
     timerState["isRecording"] = false;
 }
+
+async function clearRecording()
+{
+    timerState["recordedData"] = [];
+}
