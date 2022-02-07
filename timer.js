@@ -22,7 +22,7 @@ async function countdownTimer()
         await sleep(1000);
     }
 
-    timerHeader.innerHtML = "Recording...";
+    timerHeader.innerHTML = "Recording...";
     timerState["isRecording"] = true;
 }
 
