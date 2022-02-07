@@ -1,5 +1,6 @@
 let timerState = {
-    isRecording: false
+    isRecording: false,
+    recordedData: []
 };
 
 async function countdownTimer()

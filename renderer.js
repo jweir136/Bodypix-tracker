@@ -64,6 +64,12 @@ async function loadAndPredict()
             if (score >= 0.80)
             {
                 drawBodyPart(x, y);
+                
+                if (timerState["isRecording"])
+                {
+                    // temp. save the data in state if isRecording is set.
+                    timerState["recordedData"].push(segmentation.allPoses[i].keypoints);
+                }
             }
         }
     }
