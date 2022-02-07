@@ -5,6 +5,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.2"></script>
     <!-- Load BodyPix -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.0"></script>
+
+    <script src="timer.js"></script>
 </head>
 <body>
     <h1>Canvas</h1>
@@ -13,10 +15,9 @@
     <canvas width="800" height="800"></canvas>
 
     <h1 id="timer"></h1>
-    <button id="Record">Record</button>
+    <button id="Record" onclick="countdownTimer()">Record</button>
     <button id="Stop">Stop</button>
 
     <script src="renderer.js"></script>
-    <script src="timer.js"></script>
 </body>
 </html>
