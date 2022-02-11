@@ -1,21 +1,17 @@
-let DTW = require("dtw");
+let DTW = require("dynamic-time-warping");
 
-{
-    console.log("\n");
-    console.log("Test #1");
-    console.log("####################################");
-    console.log("\n");
+//var ser1 = [ 9, 93, 15, 19, 24 ];
+var ser1 = [[1, 1], [0, 0]];
+var ser2 = [[1, 1], [0, 0]];
+//var ser2 = [ 31, 97, 81, 82, 39 ];
+var distFunc = function( a, b ) {
+    return Math.abs( a - b );
+};
+ 
+var dtw = new DTW(ser1, ser2, distFunc);
+var score = ((97 * ser1.length) - dtw.getDistance()) / (97 * ser1.length);
+console.log(score);
 
-    let s = [1,1,2,3,2,0];
-    let t = [0,1,1,2,3,2,1];
-
-    let dtw = new DTW();
-
-    let cost = ((3 * t.length) - dtw.compute(s, t)) / (3 * t.length);
-
-    console.log("Simularity Score: " + cost);
-
-    console.log("\n");
-    console.log("####################################");
-    console.log("\n");
-}
+/*
+    N-D Arrays are not supported by most libraries. Fix this by taking the score of every dimension seperatly and averaging them.
+*/

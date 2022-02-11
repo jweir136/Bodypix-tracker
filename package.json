@@ -25,6 +25,7 @@
     "electron-packager": "^15.4.0"
   },
   "dependencies": {
-    "dtw": "^0.0.3"
+    "dtw": "^0.0.3",
+    "dynamic-time-warping": "^1.0.0"
   }
 }
