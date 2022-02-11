@@ -23,5 +23,8 @@
   "devDependencies": {
     "electron": "^16.0.8",
     "electron-packager": "^15.4.0"
+  },
+  "dependencies": {
+    "dtw": "^0.0.3"
   }
 }
